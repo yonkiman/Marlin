@@ -430,7 +430,7 @@
    * Z_PROBE_SLED is incompatible with DELTA
    */
   #if ENABLED(Z_PROBE_SLED) && ENABLED(DELTA)
-    #error "You cannot use Z_PROBE_SLED with DELTA."
+    // #error "You cannot use Z_PROBE_SLED with DELTA." // FMH - gonna give it a try...
   #endif
 
   /**

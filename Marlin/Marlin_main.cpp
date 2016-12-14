@@ -1802,9 +1802,11 @@ static void clean_up_after_endstop_or_probe_move() {
       }
     #endif
 
-    // Dock sled a bit closer to ensure proper capturing
-    do_blocking_move_to_x(X_MAX_POS + SLED_DOCKING_OFFSET - ((stow) ? 1 : 0));
-
+	#if DISABLED(SOLENOID_PROBE) // Only perform if there is actually a sled
+	  // Dock sled a bit closer to ensure proper capturing
+	  do_blocking_move_to_x(X_MAX_POS + SLED_DOCKING_OFFSET - ((stow) ? 1 : 0));
+	#endif
+	  
     #if PIN_EXISTS(SLED)
       digitalWrite(SLED_PIN, !stow); // switch solenoid
     #endif
