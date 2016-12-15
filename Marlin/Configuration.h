@@ -86,7 +86,7 @@
 // User-specified version info of this build to display in [Pronterface, etc] terminal window during
 // startup. Implementation of an idea by Prof Braino to inform user that any changes made to this
 // build by the user have been successfully uploaded into firmware.
-#define STRING_CONFIG_H_AUTHOR "(DeltaMaker, Fred Hamilton)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(DeltaMaker, FMH)" // Who made the changes.
 //#define SHOW_BOOTSCREEN
 //#define STRING_SPLASH_LINE1 SHORT_BUILD_VERSION // will be shown during bootup in line 1
 //#define STRING_SPLASH_LINE2 WEBSITE_URL         // will be shown during bootup in line 2
@@ -270,7 +270,7 @@
 #define TEMP_WINDOW     1       // (degC) Window around target to start the residency timer x degC early.
 
 // Bed temperature must be close to target for this long before M190 returns success
-#define TEMP_BED_RESIDENCY_TIME 0   // (seconds)
+#define TEMP_BED_RESIDENCY_TIME 10   // (seconds)
 #define TEMP_BED_HYSTERESIS 3       // (degC) range of +/- temperatures considered "close" to the target one
 #define TEMP_BED_WINDOW     1       // (degC) Window around target to start the residency timer x degC early.
 
@@ -383,9 +383,7 @@
 // It also enables the M302 command to set the minimum extrusion temperature
 // or to allow moving the extruder regardless of the hotend temperature.
 // *** IT IS HIGHLY RECOMMENDED TO LEAVE THIS OPTION ENABLED! ***
-
-//FMH: disabling for debug
-//#define PREVENT_COLD_EXTRUSION
+//#define PREVENT_COLD_EXTRUSION  //FMH: disabling for debug
 //#define EXTRUDE_MINTEMP 170
 
 // This option prevents a single extrusion longer than EXTRUDE_MAXLENGTH.
@@ -546,25 +544,25 @@
  */
 
 //  The following lines came from the old Configuration.h file
-	#define XYZ_FULL_STEPS_PER_ROTATION 200
-	#define XYZ_MICROSTEPS 32
-	#define XYZ_BELT_PITCH 2
-	#define XYZ_PULLEY_TEETH 20
-	#define XYZ_STEPS (XYZ_FULL_STEPS_PER_ROTATION * XYZ_MICROSTEPS / double(XYZ_BELT_PITCH) / double(XYZ_PULLEY_TEETH))
+#define XYZ_FULL_STEPS_PER_ROTATION 200
+#define XYZ_MICROSTEPS 32
+#define XYZ_BELT_PITCH 2
+#define XYZ_PULLEY_TEETH 20
+#define XYZ_STEPS (XYZ_FULL_STEPS_PER_ROTATION * XYZ_MICROSTEPS / double(XYZ_BELT_PITCH) / double(XYZ_PULLEY_TEETH))
  
 /**
  * Default Axis Steps Per Unit (steps/mm)
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2[, E3]]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT	{XYZ_STEPS, XYZ_STEPS, XYZ_STEPS, 96.4576} // { 80, 80, 80, 760*1.1 }  // default steps per unit for Kossel (GT2, 20 tooth)
+#define DEFAULT_AXIS_STEPS_PER_UNIT	{ XYZ_STEPS, XYZ_STEPS, XYZ_STEPS, 96.4576 }
 
 /**
  * Default Max Feed Rate (mm/s)
  * Override with M203
  *                                      X, Y, Z, E0 [, E1[, E2[, E3]]]
  */
-#define DEFAULT_MAX_FEEDRATE	{ 500, 500, 500, 200 } // { 500, 500, 500, 25 }
+#define DEFAULT_MAX_FEEDRATE	{ 500, 500, 500, 200 }
 
 /**
  * Default Max Acceleration (change/s) change = mm/s
@@ -572,7 +570,7 @@
  * Override with M201
  *                                      X, Y, Z, E0 [, E1[, E2[, E3]]]
  */
-#define DEFAULT_MAX_ACCELERATION	{4000,4000,4000,4000} // { 9000, 9000, 9000, 10000 }
+#define DEFAULT_MAX_ACCELERATION	{ 9000, 9000, 9000, 10000 }
 
 /**
  * Default Acceleration (change/s) change = mm/s
@@ -662,7 +660,7 @@
 // Speed for the first approach when double-probing (with PROBE_DOUBLE_TOUCH)
 #define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
 // Speed for the "accurate" probe of each point
-#define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 2) // FMH: (was /2)
+#define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 2)
 // Use double touch for probing
 //#define PROBE_DOUBLE_TOUCH
 
@@ -740,7 +738,7 @@
 // Setting the wrong pin may have unexpected and potentially disastrous consequences.
 // Use with caution and do your homework.
 //
-// #define Z_MIN_PROBE_PIN Z_MIN_PIN // X_MAX_PIN
+// #define Z_MIN_PROBE_PIN Z_MIN_PIN
 
 //
 // Enable Z_MIN_PROBE_ENDSTOP to use _both_ a Z Probe and a Z-min-endstop on the same machine.
@@ -771,7 +769,7 @@
  * Example: `M851 Z-5` with a CLEARANCE of 4  =>  9mm from bed to nozzle.
  *     But: `M851 Z+1` with a CLEARANCE of 2  =>  2mm from bed to nozzle.
  */
-#define Z_CLEARANCE_DEPLOY_PROBE   15 // Z Clearance for Deploy/Stow
+#define Z_CLEARANCE_DEPLOY_PROBE   10 // Z Clearance for Deploy/Stow
 #define Z_CLEARANCE_BETWEEN_PROBES  5 // Z Clearance between probe points
 
 //
@@ -803,7 +801,7 @@
 // @section machine
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-#define INVERT_X_DIR true // DELTA does not invert (FMH: Apparently the DeltaMaker does...)
+#define INVERT_X_DIR true
 #define INVERT_Y_DIR true
 #define INVERT_Z_DIR true
 
@@ -827,7 +825,7 @@
 #define Y_HOME_DIR 1
 #define Z_HOME_DIR 1
 
-//#define min_software_endstops true // If true, axis won't move to coordinates less than HOME_POS.
+#define min_software_endstops true // If true, axis won't move to coordinates less than HOME_POS.
 #define max_software_endstops true  // If true, axis won't move to coordinates greater than the defined lengths below.
 
 // @section machine
@@ -922,7 +920,7 @@
 
   // Set the number of grid points per dimension.
   // Works best with 5 or more points in each dimension.
-  #define ABL_GRID_POINTS_X 3 //FMH: 3 for faster debugging //9
+  #define ABL_GRID_POINTS_X 5 //FMH: 5 for faster debugging //9
   #define ABL_GRID_POINTS_Y ABL_GRID_POINTS_X
 
   // Set the boundaries for probing (where the probe can reach).
@@ -1004,7 +1002,7 @@
 #endif
 
 // Delta only homes to Z
-#define HOMING_FEEDRATE_Z  2000 // FMH: Revisit, was (200*60)
+#define HOMING_FEEDRATE_Z  4000 // FMH: Optimize
 
 //=============================================================================
 //============================= Additional Features ===========================
@@ -1021,7 +1019,6 @@
 // M502 - reverts to the default "factory settings".  You still need to store them in EEPROM afterwards if you want to.
 //define this to enable EEPROM support
 #define EEPROM_SETTINGS
-
 
 #if ENABLED(EEPROM_SETTINGS)
   // To disable EEPROM Serial responses and decrease program space by ~1700 byte: comment this out:
@@ -1413,13 +1410,6 @@
 //
 //#define BQ_LCD_SMART_CONTROLLER
 
-
-
-
-
-
-
-
 //
 // CONTROLLER TYPE: I2C
 //
@@ -1437,14 +1427,6 @@
 // Sainsmart YW Robot (LCM1602) LCD Display
 //
 //#define LCD_I2C_SAINSMART_YWROBOT
-
-
-
-
-
-
-
-
 
 //
 // Generic LCM1602 LCD adapter
@@ -1468,7 +1450,6 @@
 // integrated click & L/R/U/D buttons, separate encoder inputs.
 //
 //#define LCD_I2C_VIKI
-
 
 //
 // SSD1306 OLED full graphics generic display
@@ -1555,7 +1536,7 @@
 // Delay (in microseconds) before the next move will start, to give the servo time to reach its target angle.
 // 300ms is a good value but you can try less delay.
 // If the servo can't reach the requested position, increase it.
-#define SERVO_DELAY 0 // FMH was 300.  I have no physical servo, just trying to change the state of a pin...
+#define SERVO_DELAY 300
 
 // Servo deactivation
 //

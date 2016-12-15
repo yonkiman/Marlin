@@ -213,6 +213,7 @@
   #endif
   #if ABL_GRID
     #if (ABL_GRID_POINTS_X & 1) == 0 || (ABL_GRID_POINTS_Y & 1) == 0
+
       #error "DELTA requires ABL_GRID_POINTS_X and ABL_GRID_POINTS_Y to be odd numbers."
     #elif ABL_GRID_POINTS_X < 3
       #error "DELTA requires ABL_GRID_POINTS_X and ABL_GRID_POINTS_Y to be 3 or higher."
@@ -429,8 +430,8 @@
   /**
    * Z_PROBE_SLED is incompatible with DELTA
    */
-  #if ENABLED(Z_PROBE_SLED) && ENABLED(DELTA)
-    // #error "You cannot use Z_PROBE_SLED with DELTA." // FMH - gonna give it a try...
+  #if ENABLED(Z_PROBE_SLED) && ENABLED(DELTA) && DISABLED(SOLENOID_PROBE)
+    #error "You cannot use Z_PROBE_SLED with DELTA." // FMH: Unless it's a Solenoid Probe and not a Sled
   #endif
 
   /**
