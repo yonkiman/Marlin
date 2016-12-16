@@ -1802,7 +1802,7 @@ static void clean_up_after_endstop_or_probe_move() {
       }
     #endif
 
-	#if DISABLED(SOLENOID_PROBE) // Only perform if there is actually a sled
+	#if DISABLED(SOLENOID_PROBE) // FMH: Only perform if there is actually a sled
 	  // Dock sled a bit closer to ensure proper capturing
 	  do_blocking_move_to_x(X_MAX_POS + SLED_DOCKING_OFFSET - ((stow) ? 1 : 0));
 	#endif
@@ -3713,7 +3713,7 @@ inline void gcode_G28() {
     }
 
     int8_t px, py;
-
+	
     switch (state) {
       case MeshReport:
         if (mbl.has_mesh()) {

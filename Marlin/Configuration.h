@@ -441,16 +441,16 @@
   // NOTE NB all values for DELTA_* values MUST be floating point, so always have a decimal point in them
 
   // Center-to-center distance of the holes in the diagonal push rods.
-  #define DELTA_DIAGONAL_ROD 265.0 // 250.0 // mm
+  #define DELTA_DIAGONAL_ROD 265.0 // mm
 
   // Horizontal offset from middle of printer to smooth rod center.
-  #define DELTA_SMOOTH_ROD_OFFSET 178.06 // 175.0 // mm
+  #define DELTA_SMOOTH_ROD_OFFSET 178.06 // mm
 
   // Horizontal offset of the universal joints on the end effector.
-  #define DELTA_EFFECTOR_OFFSET 39.37 //33.0 // mm
+  #define DELTA_EFFECTOR_OFFSET 39.37 // mm
 
   // Horizontal offset of the universal joints on the carriages.
-  #define DELTA_CARRIAGE_OFFSET 29.56 // 18.0 // mm
+  #define DELTA_CARRIAGE_OFFSET 29.56 // mm
 
   // Horizontal distance bridged by diagonal push rods when effector is centered.
   #define DELTA_RADIUS (DELTA_SMOOTH_ROD_OFFSET-(DELTA_EFFECTOR_OFFSET)-(DELTA_CARRIAGE_OFFSET))
@@ -494,10 +494,10 @@
 // extra connectors. Leave undefined any used for non-endstop and non-probe purposes.
 //#define USE_XMIN_PLUG
 //#define USE_YMIN_PLUG
-#define USE_ZMIN_PLUG //FMH: for Z probe
-#define USE_XMAX_PLUG
-#define USE_YMAX_PLUG
-#define USE_ZMAX_PLUG
+#define USE_ZMIN_PLUG // FMH: for Z probe
+#define USE_XMAX_PLUG // FMH: Use max endstops for homing (Note: Deltamaker has
+#define USE_YMAX_PLUG // endstops plugged into MIN inputs, not MAX.  Adjusting assignment
+#define USE_ZMAX_PLUG // here should make for less changes in pins_RAMPS.h - need to clean up
 
 // coarse Endstop Settings
 #define ENDSTOPPULLUPS // Comment this out (using // at the start of the line) to disable the endstop pullup resistors
@@ -596,6 +596,7 @@
 #define DEFAULT_ZJERK                 20.0 // Must be same as XY for delta
 #define DEFAULT_EJERK                 10.0 // 5.0
 
+
 //===========================================================================
 //============================= Z Probe Options =============================
 //===========================================================================
@@ -628,7 +629,7 @@
 // Enable if you have a Z probe mounted on a sled like those designed by Charles Bell.
 
 #define SOLENOID_PROBE // FMH: Introducing new identifier SOLENOID_PROBE
-                       // FMH: This enables the solenoid extend/retract but disables the sled
+                       // FMH: This allows the solenoid extend/retract but disables the sled
                        // FMH: Comment out for actual an actual Z-Probe with sled
 
 #define Z_PROBE_SLED
@@ -656,7 +657,7 @@
 #define Z_PROBE_OFFSET_FROM_EXTRUDER 0 // Z offset: -below +above  [the nozzle]
 
 // X and Y axis travel speed (mm/m) between probes
-#define XY_PROBE_SPEED 4000
+#define XY_PROBE_SPEED 6000
 // Speed for the first approach when double-probing (with PROBE_DOUBLE_TOUCH)
 #define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
 // Speed for the "accurate" probe of each point
@@ -738,7 +739,7 @@
 // Setting the wrong pin may have unexpected and potentially disastrous consequences.
 // Use with caution and do your homework.
 //
-// #define Z_MIN_PROBE_PIN Z_MIN_PIN
+// #define Z_MIN_PROBE_PIN X_MAX_PIN
 
 //
 // Enable Z_MIN_PROBE_ENDSTOP to use _both_ a Z Probe and a Z-min-endstop on the same machine.
@@ -753,7 +754,7 @@
 // To use a probe you must enable one of the two options above!
 
 // Enable Z Probe Repeatability test to see how accurate your probe is
-//#define Z_MIN_PROBE_REPEATABILITY_TEST
+#define Z_MIN_PROBE_REPEATABILITY_TEST
 
 /**
  * Z probes require clearance when deploying, stowing, and moving between
@@ -838,7 +839,6 @@
 #define Y_MAX_POS DELTA_PRINTABLE_RADIUS
 #define Z_MAX_POS MANUAL_Z_HOME_POS
 
-
 //===========================================================================
 //========================= Filament Runout Sensor ==========================
 //===========================================================================
@@ -914,13 +914,13 @@
  * Turn on with the command 'M111 S32'.
  * NOTE: Requires a lot of PROGMEM!
  */
-//#define DEBUG_LEVELING_FEATURE
+#define DEBUG_LEVELING_FEATURE // FMH: Remember to disable when done with tuning
 
 #if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
 
   // Set the number of grid points per dimension.
   // Works best with 5 or more points in each dimension.
-  #define ABL_GRID_POINTS_X 5 //FMH: 5 for faster debugging //9
+  #define ABL_GRID_POINTS_X 3 //FMH: 3 for faster debugging //9
   #define ABL_GRID_POINTS_Y ABL_GRID_POINTS_X
 
   // Set the boundaries for probing (where the probe can reach).
