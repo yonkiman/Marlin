@@ -33,6 +33,13 @@
 #include "pins_RAMPS_13.h"
 
 //
+// FMH: Extruder fan pin assignment 
+// This is my best guess at the correct header file for this... 
+// not sure if it applies to anyboards but the AZTEEG_X3
+//
+#define EXTRUDER_FAN_PIN  16 // Azteeg X3  HotEnd/Fan
+
+//
 // Servos
 //
 #undef SERVO0_PIN

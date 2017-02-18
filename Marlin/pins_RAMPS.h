@@ -64,28 +64,28 @@
 #endif
 #define SERVO1_PIN          6
 #define SERVO2_PIN          5
-#define SERVO3_PIN          4
+#define SERVO3_PIN         -1 // FMH: was 4 but using 4 for Sled (Solenoid) enable pin
 
 //
 // Limit Switches
 //
-#define X_MIN_PIN           3
+#define X_MIN_PIN          -1
 #ifndef X_MAX_PIN
-  #define X_MAX_PIN         2
+  #define X_MAX_PIN         3
 #endif
-#define Y_MIN_PIN          14
-#define Y_MAX_PIN          15
-#define Z_MIN_PIN          18
-#define Z_MAX_PIN          19
+#define Y_MIN_PIN          -1
+#define Y_MAX_PIN          15 // FMH: 14 on a normal DeltaMaker, changed because that GPIO pin was flaky
+#define Z_MIN_PIN          -1 // Z_MIN_PIN input used for Z_MIN_PROBE_PIN
+#define Z_MAX_PIN          18 
 
 //
 // Z Probe (when not Z_MIN_PIN)
 //
 #ifndef Z_MIN_PROBE_PIN
-  #define Z_MIN_PROBE_PIN  32
+  #define Z_MIN_PROBE_PIN  19
 #endif
 
-#define SLED_PIN           -1
+#define SLED_PIN            4
 
 //
 // Steppers

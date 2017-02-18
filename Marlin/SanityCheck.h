@@ -430,8 +430,8 @@
   /**
    * Z_PROBE_SLED is incompatible with DELTA
    */
-  #if ENABLED(Z_PROBE_SLED) && ENABLED(DELTA)
-    #error "You cannot use Z_PROBE_SLED with DELTA."
+  #if ENABLED(Z_PROBE_SLED) && ENABLED(DELTA) && DISABLED(SOLENOID_PROBE)
+    #error "You cannot use Z_PROBE_SLED with DELTA." // FMH: Unless it's a Solenoid Probe and not a Sled
   #endif
 
   /**
